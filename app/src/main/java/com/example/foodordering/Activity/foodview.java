@@ -21,8 +21,16 @@ public class foodview extends AppCompatActivity {
         display(minteger);
 
     }public void decreaseInteger(View view) {
-        minteger = minteger - 1;
-        display(minteger);
+
+        if(minteger!=0)
+        { minteger = minteger - 1;
+            display(minteger);
+        }
+        else
+        {
+            minteger = 0;
+        }
+
     }
 
     private void display(int number) {
