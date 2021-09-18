@@ -9,7 +9,9 @@
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable/light_green_back.xml" value="0.26615384615384613" />
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable/search_back.xml" value="0.26615384615384613" />
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable/yellow_button_intro.xml" value="0.2703125" />
+        <entry key="..\:/FoodOrdering/app/src/main/res/layout/activity_foodview.xml" value="0.25416666666666665" />
         <entry key="..\:/FoodOrdering/app/src/main/res/layout/activity_intro.xml" value="0.25" />
+        <entry key="..\:/FoodOrdering/app/src/main/res/layout/activity_kitchen.xml" value="0.25416666666666665" />
         <entry key="..\:/FoodOrdering/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
