@@ -1,10 +1,13 @@
-package com.example.foodordering;
+package com.example.foodordering.Activity;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.os.Bundle;
+
+
+import com.example.foodordering.R;
 
 public class foodview extends AppCompatActivity {
     int minteger = 0;
