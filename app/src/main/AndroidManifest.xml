@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
-            android:name=".Activity.loginActivity"
+            android:name=".Activity.Activity.loginActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.kitchenActivity"
+            android:name=".Activity.Activity.kitchenActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.foodview"
+            android:name=".Activity.Activity.foodview"
             android:exported="true" />
         <activity
-            android:name=".Activity.IntroActivity"
+            android:name=".Activity.Activity.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.Activity.MainActivity"
             android:exported="true" />
     </application>
 
