@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
-            android:name=".foodview"
+            android:name=".Activity.foodview"
             android:exported="true" />
         <activity
             android:name=".Activity.IntroActivity"
