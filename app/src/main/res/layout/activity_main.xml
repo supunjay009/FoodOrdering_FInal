@@ -271,7 +271,7 @@
                         android:id="@+id/imageView10"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:src="@drawable/homenew"
+                        android:src="@drawable/waiter"
                         app:srcCompat="@drawable/waiter" />
 
                     <TextView
@@ -295,14 +295,14 @@
                         android:id="@+id/imageView11"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:src="@drawable/homenew"
+                        android:src="@drawable/cooking"
                         app:srcCompat="@drawable/cooking" />
 
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="KItchen"
+                        android:text="Kitchen"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
@@ -319,7 +319,7 @@
                         android:id="@+id/imageView12"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:src="@drawable/homenew"
+                        android:src="@drawable/settings"
                         app:srcCompat="@drawable/settings" />
 
                     <TextView
