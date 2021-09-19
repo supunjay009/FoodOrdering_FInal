@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".Activity.loginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.kitchenActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.foodview"
             android:exported="true" />
         <activity
@@ -23,7 +29,7 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
