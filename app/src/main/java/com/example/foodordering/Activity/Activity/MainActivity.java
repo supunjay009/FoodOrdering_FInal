@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<FoodDomain> foodlist=new ArrayList<>();
-        foodlist.add(new FoodDomain("Black Chicken","pizza_2","",1050.00));
-        foodlist.add(new FoodDomain("Cheese Burger","burger_2","",750.00));
-        foodlist.add(new FoodDomain("Hot Dog","hotdog_2","",450.00));
+        foodlist.add(new FoodDomain("Black Chicken","pizza_2","Flavoursome pieces of black chicken and crunchy onion with a double layer of mozzarella cheese.",1050.00));
+        foodlist.add(new FoodDomain("Cheese Burger","burger_2","Features a flame-grilled patty made from plants topped with tomatoes, lettuce, mayo, ketchup, pickles, and onions. *For guests looking for a meat-free option, a non-broiler method of preparation is available upon request. Entreé only",750.00));
+        foodlist.add(new FoodDomain("Hot Dog","hotdog_2","Shallow fry Venky's Chicken Hot Dog in a non stick pan with very little oil for 2 to 3 minutes or put in a steamer for 2 to 3 minutes.",450.00));
 
         adapter2=new PopularAdapter(foodlist);
         recyclerViewPopularList.setAdapter(adapter2);
