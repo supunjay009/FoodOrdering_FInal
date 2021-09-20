@@ -16,7 +16,7 @@
             android:name=".Activity.Activity.kitchenActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.Activity.foodview"
+            android:name=".Activity.Activity.ShowDetailActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.Activity.IntroActivity"

@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.example.foodordering.R;
 
-public class foodview extends AppCompatActivity {
+public class ShowDetailActivity extends AppCompatActivity {
     int minteger = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

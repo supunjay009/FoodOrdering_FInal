@@ -10,17 +10,18 @@ import android.os.Bundle;
 import android.content.Intent;
 
 import com.example.foodordering.Activity.Adapter.CategoryAdapter;
+import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
+import com.example.foodordering.Activity.Domain.FoodDomain;
 import com.example.foodordering.R;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 //Supun Category View
-    private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewCategoryList;
+    private RecyclerView.Adapter adapter,adapter2;
+    private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
 //Cat View.................
-
 
     private Button button,btnKitchen;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Category View.............................................................................
         recyclerViewCategory();
+        recyclerViewPopular();
 
 
 
@@ -51,10 +53,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void recyclerViewPopular() {
+
+
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewPopularList=findViewById(R.id.recyclerView2);
+        recyclerViewPopularList.setLayoutManager(linearLayoutManager);
 
 
 
-// ..........Category View........................................................................
+        ArrayList<FoodDomain> foodlist=new ArrayList<>();
+        foodlist.add(new FoodDomain("Black Chicken","pizza_2","",1050.00));
+        foodlist.add(new FoodDomain("Cheese Burger","burger_2","",750.00));
+        foodlist.add(new FoodDomain("Hot Dog","hotdog_2","",450.00));
+
+        adapter2=new PopularAdapter(foodlist);
+        recyclerViewPopularList.setAdapter(adapter2);
+    }
+
+
+    // ..........Category View........................................................................
     private void recyclerViewCategory() {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewCategoryList=findViewById(R.id.recyclerView);
@@ -73,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void foodview() {
-        Intent intent = new Intent(this, foodview.class);
+        Intent intent = new Intent(this, ShowDetailActivity.class);
         startActivity(intent);
     }
 
