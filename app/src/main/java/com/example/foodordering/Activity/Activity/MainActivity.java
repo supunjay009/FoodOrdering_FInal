@@ -36,15 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        button = (Button) findViewById(R.id.button);
-        btnKitchen = findViewById(R.id.btnKitchen);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                foodview();
-            }
-        });
 
+        btnKitchen = findViewById(R.id.btnKitchen);
         btnKitchen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
