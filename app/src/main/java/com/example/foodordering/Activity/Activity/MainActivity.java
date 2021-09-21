@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginview() {
-        Intent intent = new Intent(this, loginActivity.class);
+        //Intent intent = new Intent(this, loginActivity.class);
+        Intent intent = new Intent(this, kitchenActivity.class);
         startActivity(intent);
     }
 }
