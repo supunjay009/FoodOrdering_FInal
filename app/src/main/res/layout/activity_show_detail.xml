@@ -88,22 +88,34 @@
                 android:textColor="#686767"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1" />
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/addToCardBtn"
+    <Button
+        android:id="@+id/addtocrt_btn"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/add_to_cart_bg"
-        android:elevation="3dp"
-        android:gravity="center"
-        android:text="Add to Card"
-        android:textColor="#ffffff"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        android:backgroundTint="#009688"
+        android:backgroundTintMode="add"
+        android:fontFamily="sans-serif-black"
+        android:text="Add to cart"
+        android:textSize="16sp"
+        app:backgroundTint="#009688"
+        app:icon="@drawable/add_to_cart_bg"
+        app:iconTint="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/teal_200"
+        app:strokeColor="@color/teal_200" />
 </androidx.constraintlayout.widget.ConstraintLayout>
