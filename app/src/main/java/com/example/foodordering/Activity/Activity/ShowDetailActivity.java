@@ -1,12 +1,12 @@
 package com.example.foodordering.Activity.Activity;
 
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.foodordering.Activity.Domain.FoodDomain;
@@ -24,10 +24,12 @@ public class ShowDetailActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
+
 
         initView();
         getBundle();
@@ -69,6 +71,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         addToCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
             }
         });
