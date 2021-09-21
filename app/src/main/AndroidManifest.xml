@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".Activity.Activity.cartlist"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Activity.loginActivity"
             android:exported="true" />
         <activity

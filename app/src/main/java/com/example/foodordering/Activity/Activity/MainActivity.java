@@ -14,6 +14,7 @@ import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
 import com.example.foodordering.Activity.Domain.FoodDomain;
 import com.example.foodordering.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
 //Cat View.................
 
-    private Button button,btnKitchen;
+    private Button btnKitchen;
+    private FloatingActionButton cartbtn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,22 @@ public class MainActivity extends AppCompatActivity {
                 loginview();
             }
         });
+
+        cartbtn = findViewById(R.id.cart_btn);
+        cartbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartview();
+            }
+        });
+
+
+    }
+
+    private void cartview() {
+        //Intent intent = new Intent(this, loginActivity.class);
+        Intent intent = new Intent(this, cartlist.class);
+        startActivity(intent);
     }
 
     private void recyclerViewPopular() {
