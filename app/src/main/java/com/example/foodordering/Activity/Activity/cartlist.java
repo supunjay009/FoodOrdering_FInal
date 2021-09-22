@@ -1,11 +1,10 @@
 package com.example.foodordering.Activity.Activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,28 +12,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodordering.Activity.Adapter.cartviewholder;
+import com.example.foodordering.Activity.Adapter.cartviewAdapter;
 import com.example.foodordering.Activity.Domain.cart;
 import com.example.foodordering.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class cartlist extends AppCompatActivity {
     private ImageView plusBtn, minusBtn;
     private int tableno = 1;
-    private TextView tabletxt,taxtxt,totaltxt,itemtotaltxt,txtname,txtqtyincart,txtprice;
+    private TextView tabletxt,totaltxt;
     private Button orderbtn;
     private RecyclerView.LayoutManager layoutManagerger;
+    private ScrollView scrollView;
+    private TextView emptytxt;
     private RecyclerView recycleview;
+    cartviewAdapter cartAdapter;
+    ArrayList<cart> cartArrayList;
+    private double cSubTotal = 0;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartlist);
+
+
+        
         initView();
         setTableno();
+
+
 
         recycleview =findViewById(R.id.cartlist);
         recycleview.setHasFixedSize(true);
@@ -42,48 +57,51 @@ public class cartlist extends AppCompatActivity {
         recycleview.setLayoutManager(layoutManagerger);
 
         orderbtn = (Button) findViewById(R.id.placeorderbtn);
-        itemtotaltxt = (TextView) findViewById(R.id.totalFeeTxt);
+
         totaltxt = (TextView) findViewById(R.id.totalTxt);
-        taxtxt = (TextView) findViewById(R.id.taxTxt);
 
+
+
+
+        cartArrayList = new ArrayList<>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference cartref = database.getReference("Cart List").child("foodlist");
+
+        cartref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                    cart cart = snapshot1.getValue(cart.class);
+                    cartArrayList.add(cart);
+
+
+                }
+                cartAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        cartAdapter = new cartviewAdapter(cartArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recycleview.setLayoutManager(linearLayoutManager);
+        recycleview.setAdapter(cartAdapter);
 
 
 
 
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        final DatabaseReference cartlistref = FirebaseDatabase.getInstance().getReference().child("Cart List");
+  //  private void calculateCard() {
+   //     totaltxt = (TextView) findViewById(R.id.totalTxt);
+   //     cSubTotal=cartviewAdapter.getT;
+    //    totaltxt.setText("LKR." + String.valueOf(cSubTotal));
+    //}
 
 
-        FirebaseRecyclerOptions<cart> options= new FirebaseRecyclerOptions.Builder<cart>()
-                .setQuery(cartlistref.child("foodlist"),cart.class).build();
-
-        FirebaseRecyclerAdapter<cart, cartviewholder> adapter
-                = new FirebaseRecyclerAdapter<cart, cartviewholder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull cartviewholder holder, int position, @NonNull cart model) {
-
-                holder.txtqty.setText(model.getQty());
-                holder.txttitle.setText(model.getFname());
-                holder.txtprice.setText(model.getPrice());
-            }
-
-            @NonNull
-            @Override
-            public cartviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_layout,parent,false);
-                cartviewholder holder = new cartviewholder(view);
-                return holder;
-            }
-        };
-        recycleview.setAdapter(adapter);
-
-        adapter.startListening();
-
-    }
     private void setTableno()
     {
         tabletxt.setText(String.valueOf(tableno));
@@ -102,6 +120,7 @@ public class cartlist extends AppCompatActivity {
                     tableno = tableno - 1;
                 }
                 tabletxt.setText(String.valueOf(tableno));
+
             }
         });
     }
@@ -112,6 +131,7 @@ public class cartlist extends AppCompatActivity {
 
         tabletxt = findViewById(R.id.textView16);
         plusBtn = findViewById(R.id.imageView5);
+
         minusBtn = findViewById(R.id.imageView4);
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
 //Supun Category View
     private RecyclerView.Adapter adapter,adapter2;
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
+    private LinearLayout kitchenbtn,add_btn;
 //Cat View.................
 
     private Button btnKitchen;
-    private FloatingActionButton cartbtn;
+
 
 
 
@@ -41,30 +43,41 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        btnKitchen = findViewById(R.id.btnKitchen);
-        btnKitchen.setOnClickListener(new View.OnClickListener() {
+        kitchenbtn = findViewById(R.id.kitchen_btn);
+        kitchenbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginview();
             }
+
+
+
+        });
+        add_btn = findViewById(R.id.add_btn);
+        add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MainActivity.this,location.class);
+                startActivity(intent);
+            }
+
+
+
         });
 
-        cartbtn = findViewById(R.id.cart_btn);
+        FloatingActionButton cartbtn = (FloatingActionButton) findViewById(R.id.cart_btn);
         cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartview();
+                Intent intent = new Intent(MainActivity.this,cartlist.class);
+                startActivity(intent);
             }
         });
 
 
     }
 
-    private void cartview() {
-        //Intent intent = new Intent(this, loginActivity.class);
-        Intent intent = new Intent(this, cartlist.class);
-        startActivity(intent);
-    }
+
 
     private void recyclerViewPopular() {
 

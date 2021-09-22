@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Activity.ShowDetailActivity">
 
+    <TextView
+        android:id="@+id/pid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+        tools:visibility="invisible" />
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
@@ -31,14 +40,30 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/priceTxt"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LKR"
-                android:textAlignment="center"
-                android:textColor="#059951"
-                android:textSize="24sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lkrtxt"
+                    android:layout_width="203dp"
+                    android:layout_height="wrap_content"
+                    android:text="LKR"
+                    android:textAlignment="textEnd"
+                    android:textColor="#059951"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/priceinviewTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="viewStart"
+                    android:textColor="#059951"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/foodPic"
@@ -89,11 +114,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/pid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1" />
         </LinearLayout>
     </ScrollView>
 

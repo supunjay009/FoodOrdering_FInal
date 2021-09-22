@@ -1,17 +1,16 @@
 package com.example.foodordering.Activity.Activity;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.foodordering.Activity.Domain.FoodDomain;
@@ -57,7 +56,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                 .into(picFood);
 
         titleTxt.setText(object.getTitle());
-        feeTxt.setText("LKR " + object.getFee());
+        feeTxt.setText(object.getFee().toString());
         descriptionTxt.setText(object.getDescription());
         numberOrderTxt.setText(String.valueOf(numberOrder));
 
@@ -99,7 +98,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
         SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
         savecurrenttime = currenttime.format(calfordate.getTime());
-       final DatabaseReference cartlistref = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final DatabaseReference cartlistref = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         final HashMap<String,Object> cartmap = new HashMap<>();
         cartmap.put("fid",foodid.getText().toString());
@@ -132,7 +131,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         addToCardBtn = findViewById(R.id.addtocrt_btn);
         foodid = findViewById(R.id.pid);
         titleTxt = findViewById(R.id.titleTxt);
-        feeTxt = findViewById(R.id.priceTxt);
+        feeTxt = findViewById(R.id.priceinviewTxt);
         descriptionTxt = findViewById(R.id.descriptionTxt);
         numberOrderTxt = findViewById(R.id.numberOrderTxt);
         plusBtn = findViewById(R.id.plusBtn);

@@ -29,67 +29,53 @@
         android:id="@+id/title2Txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
         android:text="title"
-        android:textColor="#373b54"
+        android:textColor="@color/substract_background"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/picCard"
-        app:layout_constraintTop_toTopOf="@+id/picCard" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Food Quantity : "
-        android:textColor="#373b54"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/picCard"
         app:layout_constraintStart_toEndOf="@+id/picCard"
-        app:layout_constraintTop_toBottomOf="@+id/title2Txt"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintTop_toTopOf="@+id/picCard"
+        app:layout_constraintVertical_bias="0.157" />
 
     <TextView
         android:id="@+id/txtqtyincart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:text="1"
         android:textColor="#373b54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintBottom_toBottomOf="@+id/picCard"
+        app:layout_constraintStart_toEndOf="@+id/picCard"
+        app:layout_constraintTop_toTopOf="@+id/picCard"
+        app:layout_constraintVertical_bias="0.802" />
 
     <TextView
         android:id="@+id/txtpriceincart"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="28dp"
         android:text="0"
         android:textColor="#373b54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21"
-        app:layout_constraintVertical_bias="0.333" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:text="LKR."
-        android:textColor="@color/substract_background"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/txtqtyincart"
         app:layout_constraintStart_toEndOf="@+id/txtqtyincart"
         app:layout_constraintTop_toTopOf="@+id/txtqtyincart"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="25dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@android:drawable/ic_delete" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

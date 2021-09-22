@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FoodOrdering</string>
+    <string name="map_key" translatable="false">AIzaSyClpJvgQqe6sXNP9PLo9CLDEYuURU47APc</string>
 </resources>

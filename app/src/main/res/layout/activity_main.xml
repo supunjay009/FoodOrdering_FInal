@@ -107,7 +107,7 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
-                    android:background="@drawable/light_green_back"
+                    android:background="@drawable/add_to_cart_bg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +197,8 @@
                     android:layout_height="wrap_content"
                     android:text="Kitchen"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -223,6 +224,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -255,20 +257,21 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
+
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView10"
+                        android:id="@+id/imageView7"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:src="@drawable/waiter"
-                        app:srcCompat="@drawable/waiter" />
+                        android:src="@drawable/pngtreelocation_flat_multi_color_icon_3777276"
+                        app:srcCompat="@drawable/pngtreelocation_flat_multi_color_icon_3777276" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/hometxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Home"
+                        android:text="Location"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
@@ -330,12 +333,13 @@
             android:id="@+id/cart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#08ff98"
+            android:backgroundTint="@color/substract_background"
             android:elevation="3dp"
             android:src="@drawable/foodstand"
             app:backgroundTint="#049458"
             app:layout_anchor="@id/app_bar"
-            app:maxImageSize="30dp" />
+            app:maxImageSize="30dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
