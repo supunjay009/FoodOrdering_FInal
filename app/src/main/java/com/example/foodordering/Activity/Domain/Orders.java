@@ -6,12 +6,12 @@ import java.util.HashMap;
 public class Orders {
     private int id;
     private boolean served;
-    private HashMap<String,HashMap<String,Integer>> items;
+    private HashMap<String,Item> items;
 
     public Orders() {
     }
 
-    public Orders(int id, boolean served, HashMap<String,HashMap<String,Integer>> items) {
+    public Orders(int id, boolean served, HashMap<String,Item> items) {
         this.id = id;
         this.served = served;
         this.items = items;
@@ -25,27 +25,13 @@ public class Orders {
         return served;
     }
 
-    public HashMap<String, HashMap<String, Integer>> getItems() {
+    public HashMap<String, Item> getItems() {
         return items;
     }
 
     public ArrayList<Item> getItemList() {
         ArrayList<Item> itemList = new ArrayList<>();
-
-        for (HashMap<String,Integer> item: items.values()) {
-            Item i = new Item(item.get("food"), item.get("qty"));
-            itemList.add(i);
-        }
-
+        itemList.addAll(items.values());
         return itemList;
-    }
-
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id=" + id +
-                ", served=" + served +
-                ", items=" + items +
-                '}';
     }
 }

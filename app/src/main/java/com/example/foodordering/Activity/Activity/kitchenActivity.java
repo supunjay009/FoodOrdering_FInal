@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.foodordering.Activity.Adapter.OrderAdapter;
+import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.Activity.Domain.Item;
 import com.example.foodordering.Activity.Domain.Orders;
 import com.example.foodordering.R;
@@ -20,13 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class kitchenActivity extends AppCompatActivity {
 
     OrderAdapter orderAdapter;
     ArrayList<Orders> ordersArrayList;
     ArrayList<Item> itemArrayList;
+    ArrayList<Food> foodArrayList;
     RecyclerView RVOrder;
 
     @Override
@@ -40,12 +40,29 @@ public class kitchenActivity extends AppCompatActivity {
         itemArrayList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("orders");
-        myRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference orderRef = database.getReference("orders");
+        DatabaseReference foodRef = database.getReference("food");
+
+        orderRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                foodRef.addValueEventListener((new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                            Food food = snapshot1.getValue(Food.class);
+                            foodArrayList.add(food);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }));
+
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                    Orders order = snapshot1.getValue((Orders.class));
+                    Orders order = snapshot1.getValue(Orders.class);
                     ordersArrayList.add(order);
                     for (int k=0;k<order.getItemList().size();k++) {
                         itemArrayList.add(order.getItemList().get(k));

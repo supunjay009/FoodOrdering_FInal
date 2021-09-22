@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/AndroidStudioProjects/FoodOrdering/app/src/main/res/layout/activity_kitchen.xml" value="0.25625" />
+        <entry key="..\:/Documents/AndroidStudioProjects/FoodOrdering/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Documents/AndroidStudioProjects/FoodOrdering/app/src/main/res/layout/lst_order.xml" value="0.25625" />
+        <entry key="..\:/Documents/AndroidStudioProjects/FoodOrdering/app/src/main/res/layout/lst_row_food.xml" value="0.33" />
+        <entry key="..\:/Documents/AndroidStudioProjects/FoodOrdering/app/src/main/res/layout/lst_row_order_item.xml" value="0.25" />
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26666666666666666" />
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable/cart_background.xml" value="0.2703125" />
         <entry key="..\:/FoodOrdering/app/src/main/res/drawable/category_background1.xml" value="0.2703125" />

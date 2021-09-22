@@ -1,9 +1,11 @@
 package com.example.foodordering.Activity.Adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.Activity.Domain.Item;
 import com.example.foodordering.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -35,10 +40,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
+
         Item item = itemArrayList.get(position);
 
-        holder.txtFood.setText(String.valueOf(item.getFoodId()));
+        StorageReference photoRef = storageReference.child(item.getImage());
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                holder.imgFood.setImageURI(uri);
+            }
+        });
+
+        holder.txtFood.setText(String.valueOf(item.getName()));
         holder.txtQty.setText(String.valueOf(item.getQty()));
+        holder.txtFoodID.setText((String.valueOf(item.getFoodId())));
     }
 
     @Override
@@ -48,13 +64,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
 
-        TextView txtFood,txtQty;
+        TextView txtFood,txtQty,txtFoodID;
+        ImageView imgFood;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtFood = itemView.findViewById(R.id.txtFood);
             txtQty = itemView.findViewById(R.id.txtQty);
+            txtFoodID = itemView.findViewById(R.id.lblFoodID);
+            imgFood = itemView.findViewById(R.id.imgFood);
         }
     }
 }
