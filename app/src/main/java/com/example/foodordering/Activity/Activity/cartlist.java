@@ -35,7 +35,7 @@ public class cartlist extends AppCompatActivity {
     cartviewAdapter cartAdapter;
     ArrayList<cart> cartArrayList;
     private double cSubTotal = 0;
-
+    private Double toteach,total=0.00;;
 
 
 
@@ -48,7 +48,6 @@ public class cartlist extends AppCompatActivity {
         
         initView();
         setTableno();
-
 
 
         recycleview =findViewById(R.id.cartlist);
@@ -95,11 +94,6 @@ public class cartlist extends AppCompatActivity {
 
     }
 
-  //  private void calculateCard() {
-   //     totaltxt = (TextView) findViewById(R.id.totalTxt);
-   //     cSubTotal=cartviewAdapter.getT;
-    //    totaltxt.setText("LKR." + String.valueOf(cSubTotal));
-    //}
 
 
     private void setTableno()
