@@ -49,10 +49,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         if(order.isServed()) {
             holder.txtServeState.setText(finish);
             holder.txtServeState.setTextColor(Color.parseColor("#365243"));
+            holder.btnDone.setVisibility(View.GONE);
         }
         else {
             holder.txtServeState.setText(pending);
             holder.txtServeState.setTextColor(Color.parseColor("#fc5203"));
+            holder.btnDone.setVisibility(View.VISIBLE);
         }
 
         FoodAdapter foodAdapter = new FoodAdapter(itemArrayList);
@@ -66,7 +68,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference orderRef = database.getReference("orders");
                 orderRef.child(order.getName()).child("served").setValue(true);
-                holder.btnDone.setVisibility(View.GONE);
             }
         });
 

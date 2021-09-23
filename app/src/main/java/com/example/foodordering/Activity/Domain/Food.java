@@ -4,18 +4,18 @@ public class Food {
 
     private int id;
     private double price,rating;
-    private String name,description,imageURL;
+    private String name,description,image;
 
     public Food() {
     }
 
-    public Food(int id, double price, double rating, String name, String description, String imageURL) {
+    public Food(int id, double price, double rating, String name, String description, String image) {
         this.id = id;
         this.price = price;
         this.rating = rating;
         this.name = name;
         this.description = description;
-        this.imageURL = imageURL;
+        this.image = image;
     }
 
     public int getId() {
@@ -38,7 +38,7 @@ public class Food {
         return description;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage() {
+        return image;
     }
 }
