@@ -15,6 +15,7 @@ import com.example.foodordering.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,16 +45,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         Item item = itemArrayList.get(position);
 
         StorageReference photoRef = storageReference.child(item.getImage());
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                holder.imgFood.setImageURI(uri);
+                //holder.imgFood.setImageURI(uri);
+                Picasso.get().load(uri).into(holder.imgFood);
             }
         });
 
         holder.txtFood.setText(String.valueOf(item.getName()));
         holder.txtQty.setText(String.valueOf(item.getQty()));
-        holder.txtFoodID.setText((String.valueOf(item.getFoodId())));
+        holder.txtFoodID.setText(String.valueOf(item.getId()));
     }
 
     @Override
@@ -71,7 +73,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
             txtFood = itemView.findViewById(R.id.txtFood);
             txtQty = itemView.findViewById(R.id.txtQty);
-            txtFoodID = itemView.findViewById(R.id.lblFoodID);
+            txtFoodID = itemView.findViewById(R.id.txtFoodID);
             imgFood = itemView.findViewById(R.id.imgFood);
         }
     }

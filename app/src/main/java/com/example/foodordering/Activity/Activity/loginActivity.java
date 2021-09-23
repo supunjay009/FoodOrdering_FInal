@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class loginActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class loginActivity extends AppCompatActivity {
     private Button btnSignin;
     private EditText editEmail,editPassword;
     private String email,password;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -30,6 +32,9 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+
+        progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.GONE);
 
         editEmail = findViewById(R.id.txtEmail);
         editPassword = findViewById(R.id.txtPassword);
@@ -40,6 +45,9 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = editEmail.getText().toString().trim();
                 password = editPassword.getText().toString();
+
+                btnSignin.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
 
                 userLogin();
             }
@@ -61,6 +69,8 @@ public class loginActivity extends AppCompatActivity {
                             kitchenView();
                         } else {
                             // If sign in fails, display a message to the user.
+                            btnSignin.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(loginActivity.this,"Failed to login. Check Email and Password!",Toast.LENGTH_LONG).show();
                         }
                     }

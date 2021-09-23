@@ -7,6 +7,7 @@ public class Orders {
     private int id;
     private boolean served;
     private HashMap<String,Item> items;
+    private String name;
 
     public Orders() {
     }
@@ -33,5 +34,17 @@ public class Orders {
         ArrayList<Item> itemList = new ArrayList<>();
         itemList.addAll(items.values());
         return itemList;
+    }
+
+    public void setServed(boolean served) {
+        this.served = served;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

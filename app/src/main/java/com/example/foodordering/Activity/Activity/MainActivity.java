@@ -50,9 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 loginview();
             }
 
-
-
         });
+
         add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginview() {
-        //Intent intent = new Intent(this, loginActivity.class);
-        Intent intent = new Intent(this, kitchenActivity.class);
+        Intent intent = new Intent(this, loginActivity.class);
         startActivity(intent);
     }
 }

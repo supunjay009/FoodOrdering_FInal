@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.foodordering.Activity.Adapter.OrderAdapter;
@@ -38,14 +40,18 @@ public class kitchenActivity extends AppCompatActivity {
 
         ordersArrayList = new ArrayList<>();
         itemArrayList = new ArrayList<>();
+        foodArrayList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference orderRef = database.getReference("orders");
         DatabaseReference foodRef = database.getReference("food");
 
+
         orderRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                foodArrayList.clear();
+                ordersArrayList.clear();
                 foodRef.addValueEventListener((new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -63,7 +69,9 @@ public class kitchenActivity extends AppCompatActivity {
 
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
                     Orders order = snapshot1.getValue(Orders.class);
+                    order.setName(snapshot1.getKey());
                     ordersArrayList.add(order);
+                    itemArrayList.clear();
                     for (int k=0;k<order.getItemList().size();k++) {
                         itemArrayList.add(order.getItemList().get(k));
                     }

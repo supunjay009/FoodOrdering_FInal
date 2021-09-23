@@ -2,21 +2,21 @@ package com.example.foodordering.Activity.Domain;
 
 public class Item {
 
-    private int foodId,qty;
+    private int id,qty;
     private String name,image;
 
     public Item() {
     }
 
-    public Item(int foodId, int qty, String name, String imageURL) {
-        this.foodId = foodId;
+    public Item(int id, int qty, String name, String image) {
+        this.id = id;
         this.qty = qty;
         this.name = name;
         this.image = image;
     }
 
-    public int getFoodId() {
-        return foodId;
+    public int getId() {
+        return id;
     }
 
     public int getQty() {
