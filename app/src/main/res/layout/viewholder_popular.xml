@@ -5,34 +5,37 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/cart_background"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    android:layout_margin="4dp">
 
     <ImageView
         android:id="@+id/pic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="81dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@drawable/pizza_2" />
+        app:srcCompat="@color/material_on_surface_disabled" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:gravity="center"
-        android:text="title"
+        android:text="item"
         android:textAlignment="center"
         android:textColor="#373b54"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +43,8 @@
         android:id="@+id/fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.0"
+        android:layout_marginTop="8dp"
+        android:text="price"
         android:textColor="#373b54"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -52,13 +56,15 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:text="LKR"
+        android:layout_marginEnd="4dp"
+        android:text="$"
         android:textColor="#059951 "
 
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/fee"
         app:layout_constraintEnd_toStartOf="@+id/fee"
-        app:layout_constraintTop_toBottomOf="@+id/pic" />
+        app:layout_constraintTop_toBottomOf="@+id/pic"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/addBtn"

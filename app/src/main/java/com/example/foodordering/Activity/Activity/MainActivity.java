@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,23 +15,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodordering.Activity.Adapter.CategoryAdapter;
 import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
+import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.Activity.Domain.FoodDomain;
 import com.example.foodordering.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 //Supun Category View
-    private RecyclerView.Adapter adapter,adapter2;
+    private RecyclerView.Adapter adapter;
+    private PopularAdapter popularAdapter;
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
     private LinearLayout kitchenbtn,add_btn;
+    private ArrayList<Food> foodArrayList;
+
 //Cat View.................
-
     private Button btnKitchen;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
         //Category View.............................................................................
         recyclerViewCategory();
         recyclerViewPopular();
-
-
-
 
         kitchenbtn = findViewById(R.id.kitchen_btn);
         kitchenbtn.setOnClickListener(new View.OnClickListener() {
@@ -76,26 +80,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     private void recyclerViewPopular() {
 
+        recyclerViewPopularList = findViewById(R.id.recyclerView2);
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        recyclerViewPopularList=findViewById(R.id.recyclerView2);
+        foodArrayList = new ArrayList<>();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference foodRef = database.getReference("food");
+        foodRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                foodArrayList.clear();
+                for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                    Food food = snapshot1.getValue(Food.class);
+                    foodArrayList.add(food);
+                }
+                popularAdapter.notifyDataSetChanged();
+                Toast.makeText(MainActivity.this,String.valueOf(foodArrayList.size()),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+//        foodArrayList.add(new FoodDomain("Pizza - Black Chicken","pizza_2","Flavoursome pieces of black chicken and crunchy onion with a double layer of mozzarella cheese.",1050.00));
+//        foodArrayList.add(new FoodDomain("Cheese Burger","burger_2","Features a flame-grilled patty made from plants topped with tomatoes, lettuce, mayo, ketchup, pickles, and onions. *For guests looking for a meat-free option, a non-broiler method of preparation is available upon request. Entreé only",750.00));
+//        foodArrayList.add(new FoodDomain("Hot Dog","hotdog_2","Shallow fry Venky's Chicken Hot Dog in a non stick pan with very little oil for 2 to 3 minutes or put in a steamer for 2 to 3 minutes.",450.00));
+//        foodArrayList.add(new FoodDomain("Donut","donut_2","Good One",300.00));
+//        foodArrayList.add(new FoodDomain("Beverages","drink_2","Availble Pepsi ans Coke",150.00));
+
+        popularAdapter = new PopularAdapter(foodArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
-
-
-
-        ArrayList<FoodDomain> foodlist=new ArrayList<>();
-        foodlist.add(new FoodDomain("Pizza - Black Chicken","pizza_2","Flavoursome pieces of black chicken and crunchy onion with a double layer of mozzarella cheese.",1050.00));
-        foodlist.add(new FoodDomain("Cheese Burger","burger_2","Features a flame-grilled patty made from plants topped with tomatoes, lettuce, mayo, ketchup, pickles, and onions. *For guests looking for a meat-free option, a non-broiler method of preparation is available upon request. Entreé only",750.00));
-        foodlist.add(new FoodDomain("Hot Dog","hotdog_2","Shallow fry Venky's Chicken Hot Dog in a non stick pan with very little oil for 2 to 3 minutes or put in a steamer for 2 to 3 minutes.",450.00));
-        foodlist.add(new FoodDomain("Donut","donut_2","Good One",300.00));
-        foodlist.add(new FoodDomain("Beverages","drink_2","Availble Pepsi ans Coke",150.00));
-
-        adapter2=new PopularAdapter(foodlist);
-        recyclerViewPopularList.setAdapter(adapter2);
+        recyclerViewPopularList.setAdapter(popularAdapter);
     }
 
 

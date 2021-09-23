@@ -40,10 +40,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
-
         Item item = itemArrayList.get(position);
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
         StorageReference photoRef = storageReference.child(item.getImage());
         photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
