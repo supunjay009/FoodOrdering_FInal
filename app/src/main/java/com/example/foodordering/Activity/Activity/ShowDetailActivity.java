@@ -64,7 +64,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                 Picasso.get().load(uri).into(picFood);
             }
         });
-
+        foodid.setText(String.valueOf(food.getId()));
         titleTxt.setText(food.getName());
         feeTxt.setText(String.valueOf(food.getPrice()));
         descriptionTxt.setText(food.getDescription());
@@ -117,12 +117,13 @@ public class ShowDetailActivity extends AppCompatActivity {
         cartMap.put("price",feeTxt.getText().toString());
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
+        cartMap.put("images",food.getImage());
         cartMap.put("qty",numberOrderTxt.getText().toString());
 
 //        cart.setFid(String.valueOf(food.getId()));
 //        cart.setFname(food.getName());
 
-        cartListRef.child("foodList").child(saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        cartListRef.child("foodlist").child(foodid.getText().toString()).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())

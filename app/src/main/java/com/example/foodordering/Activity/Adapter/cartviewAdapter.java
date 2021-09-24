@@ -1,28 +1,51 @@
 package com.example.foodordering.Activity.Adapter;
 
+import static java.lang.String.*;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodordering.Activity.Activity.MainActivity;
+import com.example.foodordering.Activity.Activity.cartlist;
 import com.example.foodordering.Activity.Domain.Cart;
 import com.example.foodordering.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHolder>
 {
-
-
+    int totalprice,toteach=0;
+    Context context;
     ArrayList<Cart> cartArrayList;
+    DatabaseReference reference;
+    public int oid =1;
+    private Intent MainActivity;
 
     public cartviewAdapter(ArrayList<Cart> cartArrayList) {
+
+
         this.cartArrayList = cartArrayList;
     }
 
@@ -34,41 +57,139 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull cartviewAdapter.ViewHolder holder, @SuppressLint("RecyclerView")  final int position) {
+    public void onBindViewHolder(@NonNull cartviewAdapter.ViewHolder holder, @SuppressLint("RecyclerView")   final int position) {
 
         final Cart cart = cartArrayList.get(position);
-        holder.txtname.setText(String.valueOf(cart.getFname()));
-        holder.txtqty.setText(String.valueOf("Quantity : "+cart.getQty()));
-        holder.txtprice.setText(String.valueOf(cart.getPrice()));
 
+        String fid = String.valueOf(cart.getFid());
+        //get img frm db to cart
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");;
+        StorageReference photoRef = storageReference.child(cart.getImages());
+        photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //holder.imgFood.setImageURI(uri);
+                Picasso.get().load(uri).into(holder.img);
+            }
+        });
 
-      //  getTotalFee();
+        holder.txtname.setText(valueOf(cart.getFname()));
+        holder.txtqty.setText(valueOf("Quantity : "+cart.getQty()));
+        holder.txtprice.setText(valueOf("LKR "+cart.getPrice()+".00"));
+        holder.fid.setText(valueOf(cart.getFid()));
+
+        //get total
+
 
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartArrayList.remove(position);
-                notifyDataSetChanged();
-               // getTotalFee();
+                String fid =String.valueOf(cartArrayList.get(position).getFid());
+                deletefid(fid,position);
+                //  caltot(position);
             }
         });
+        caltot(position);
+
+        cartlist.orderbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                placeorder();
+            }
+        });
+    }
+
+    private void placeorder() {
+        final DatabaseReference orderlistref = FirebaseDatabase.getInstance().getReference().child("orders");
+        //String tno =cartlist.tabletxt.getText().toString();
+        final HashMap<String,Object> cartmap = new HashMap<>();
+        cartmap.put("id",oid);
+        cartmap.put("tableno",1);
+        cartmap.put("served","False");
+
+        orderlistref.child(String.valueOf(oid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                {
+
+
+                    Toast.makeText(context.getApplicationContext(), "Your order is placed.",Toast.LENGTH_SHORT).show();
+                    // Intent intent =new Intent(context.getApplicationContext().this, MainActivity.class);
+                    context.startActivity(MainActivity);
+
+
+                }
+            }
+        });
+        //int qty = Integer.parseInt(orderqty.getText().toString());
+        //int fid = Integer.parseInt(fidtxtincart.getText().toString());
+        //int qty = 1;
+        //  int fid =1;
+        final HashMap<String,Object> itemmap = new HashMap<>();
+        for (int i=0;i<cartArrayList.size();i++) {
+
+
+            itemmap.put("id",cartArrayList.get(i).getFid());
+            itemmap.put("image",cartArrayList.get(i).getImages());
+            itemmap.put("name",cartArrayList.get(i).getFname());
+            itemmap.put("qty",cartArrayList.get(i).getQty());
+            itemmap.put("totprice",totalprice);
+
+            orderlistref.child(String.valueOf(oid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful())
+                    {
+                    }
+                }
+            });
+        }
+
 
     }
+
+    private void caltot(int position) {
+
+        if(position==0)
+        {
+            totalprice=0;
+            Intent intent = new Intent("MyTotalAmmount");
+            intent.putExtra("totalAmmount",totalprice);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        }
+        else
+        {
+
+        }
+        int qty =Integer.valueOf(cartArrayList.get(position).getQty());
+        int price =Integer.valueOf(cartArrayList.get(position).getPrice());
+        toteach=qty*price;
+        totalprice=totalprice+toteach;
+        Intent intent = new Intent("MyTotalAmmount");
+        intent.putExtra("totalAmmount",totalprice);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+
+    }
+
+    private void deletefid(String fid,int position) {
+        reference = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        reference.child("foodlist").child(fid).removeValue();
+        cartArrayList.remove(position);
+        notifyDataSetChanged();
+    }
+
     public void setData(ArrayList<Cart> citems) {
         this.cartArrayList = citems;
         notifyDataSetChanged();
     }
 
-   //public  Double  getTotalFee() {
 
-      // Double toteach,total=0.00;;
-      //  for (int i = 0; i < cartArrayList.size(); i++) {
-           // toteach =Double.valueOf(cartArrayList.get(i).getPrice())*Integer.valueOf(cartArrayList.get(i).getQty());
-            //total=total+toteach;
-      //  }
-        //return total;
-   // }
 
 
     @Override
@@ -78,8 +199,8 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtname,txtqty,txtprice,totaltxt;
-        ImageView delete;
+        TextView txtname,txtqty,txtprice,fid,tableno;
+        ImageView delete,img;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -89,6 +210,8 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
             txtqty = itemView.findViewById(R.id.txtqtyincart);
             txtprice = itemView.findViewById(R.id.txtpriceincart);
             delete = itemView.findViewById(R.id.imageView8);
+            fid = itemView.findViewById(R.id.fidtxtincart);
+            img = itemView.findViewById(R.id.picCard);
 
 
         }
