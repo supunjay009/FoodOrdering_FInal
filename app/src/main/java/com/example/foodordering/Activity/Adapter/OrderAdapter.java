@@ -47,6 +47,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         String pending = "PENDING";
 
         holder.txtOrderNo.setText(String.valueOf(order.getId()));
+        holder.txtTblNo.setText(String.valueOf(order.getTableNo()));
         if(order.isServed()) {
             holder.txtServeState.setText(finish);
             holder.txtServeState.setTextColor(Color.parseColor("#365243"));
@@ -81,7 +82,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtOrderNo,txtServeState;
+        TextView txtOrderNo,txtServeState,txtTblNo;
         RecyclerView lstFood;
         Button btnDone;
 
@@ -92,6 +93,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             txtServeState = itemView.findViewById(R.id.txtServed);
             lstFood = itemView.findViewById(R.id.lstFood);
             btnDone = itemView.findViewById(R.id.btnDone);
+            txtTblNo = itemView.findViewById(R.id.txtTblNo);
         }
 
     }
