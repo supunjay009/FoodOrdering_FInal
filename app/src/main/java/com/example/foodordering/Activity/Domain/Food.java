@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Food implements Serializable {
 
-    private int id;
-    private double price,rating;
+    private int id, price;
+    private double rating;
     private String name,description,image;
 
     public Food() {
     }
 
-    public Food(int id, double price, double rating, String name, String description, String image) {
+    public Food(int id, int price, double rating, String name, String description, String image) {
         this.id = id;
         this.price = price;
         this.rating = rating;
@@ -24,7 +24,7 @@ public class Food implements Serializable {
         return id;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 

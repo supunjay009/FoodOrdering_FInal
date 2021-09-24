@@ -87,7 +87,8 @@ public class kitchenActivity extends AppCompatActivity {
         });
 
 
-        orderAdapter = new OrderAdapter(this,ordersArrayList,itemArrayList);
+//        orderAdapter = new OrderAdapter(this,ordersArrayList,itemArrayList);
+        orderAdapter = new OrderAdapter(this,ordersArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         RVOrder.setLayoutManager(linearLayoutManager);
         RVOrder.setAdapter(orderAdapter);

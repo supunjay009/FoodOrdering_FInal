@@ -24,12 +24,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     private Activity activity;
     ArrayList<Orders> ordersArrayList;
-    ArrayList<Item> itemArrayList;
+    //ArrayList<Item> itemArrayList;
 
-    public OrderAdapter(Activity activity, ArrayList<Orders> ordersArrayList, ArrayList<Item> itemArrayList) {
+//    public OrderAdapter(Activity activity, ArrayList<Orders> ordersArrayList, ArrayList<Item> itemArrayList) {
+    public OrderAdapter(Activity activity, ArrayList<Orders> ordersArrayList) {
         this.activity = activity;
         this.ordersArrayList = ordersArrayList;
-        this.itemArrayList = itemArrayList;
+        //this.itemArrayList = itemArrayList;
     }
 
     @NonNull
@@ -57,7 +58,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             holder.btnDone.setVisibility(View.VISIBLE);
         }
 
-        FoodAdapter foodAdapter = new FoodAdapter(itemArrayList);
+        FoodAdapter foodAdapter = new FoodAdapter(order.getItemList());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         holder.lstFood.setLayoutManager(linearLayoutManager);
         holder.lstFood.setAdapter(foodAdapter);
