@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.Activity.Adapter.cartviewAdapter;
-import com.example.foodordering.Activity.Domain.cart;
+import com.example.foodordering.Activity.Domain.Cart;
 import com.example.foodordering.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +33,7 @@ public class cartlist extends AppCompatActivity {
     private TextView emptytxt;
     private RecyclerView recycleview;
     cartviewAdapter cartAdapter;
-    ArrayList<cart> cartArrayList;
+    ArrayList<Cart> cartArrayList;
     private double cSubTotal = 0;
     private Double toteach,total=0.00;;
 
@@ -70,7 +70,7 @@ public class cartlist extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                    cart cart = snapshot1.getValue(cart.class);
+                    Cart cart = snapshot1.getValue(Cart.class);
                     cartArrayList.add(cart);
 
 

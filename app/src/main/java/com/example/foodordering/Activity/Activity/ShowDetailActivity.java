@@ -2,6 +2,7 @@ package com.example.foodordering.Activity.Activity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +13,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.example.foodordering.Activity.Domain.FoodDomain;
+import com.example.foodordering.Activity.Domain.Cart;
+import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,10 +36,10 @@ public class ShowDetailActivity extends AppCompatActivity {
     private Button addToCardBtn;
     private TextView titleTxt, feeTxt, descriptionTxt, numberOrderTxt,foodid;
     private ImageView plusBtn, minusBtn, picFood;
-    private FoodDomain object;
+    private Food food;
     private int numberOrder = 1;
-
-
+    private Intent intent;
+    //private Cart cart = new Cart();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +52,22 @@ public class ShowDetailActivity extends AppCompatActivity {
 
     private void getBundle() {
 
-        object = (FoodDomain) getIntent().getSerializableExtra("object");
+        intent = getIntent();
+        food = (Food) intent.getSerializableExtra("FOOD");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getPic(), "drawable", this.getPackageName());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
+        StorageReference photoRef = storageReference.child(food.getImage());
+        photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //holder.imgFood.setImageURI(uri);
+                Picasso.get().load(uri).into(picFood);
+            }
+        });
 
-        Glide.with(this)
-                .load(drawableResourceId)
-                .into(picFood);
-
-        titleTxt.setText(object.getTitle());
-        feeTxt.setText(object.getFee().toString());
-        descriptionTxt.setText(object.getDescription());
+        titleTxt.setText(food.getName());
+        feeTxt.setText(String.valueOf(food.getPrice()));
+        descriptionTxt.setText(food.getDescription());
         numberOrderTxt.setText(String.valueOf(numberOrder));
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,33 +92,37 @@ public class ShowDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                addingtocartlist();
+                addingToCartList();
             }
         });
 
     }
 
-    private void addingtocartlist() {
+    private void addingToCartList() {
 
-        String savecurrenttime,savecurrentdate;
+        String saveCurrentTime,saveCurrentDate;
 
-        Calendar calfordate =  Calendar.getInstance();
-        SimpleDateFormat curentdate = new SimpleDateFormat("MMM dd yyyy");
-        savecurrentdate = curentdate.format(calfordate.getTime());
+        Calendar calForDate =  Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
 
-        SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
-        savecurrenttime = currenttime.format(calfordate.getTime());
-        final DatabaseReference cartlistref = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
 
-        final HashMap<String,Object> cartmap = new HashMap<>();
-        cartmap.put("fid",foodid.getText().toString());
-        cartmap.put("fname",titleTxt.getText().toString());
-        cartmap.put("price",feeTxt.getText().toString());
-        cartmap.put("date",savecurrentdate);
-        cartmap.put("time",savecurrenttime);
-        cartmap.put("qty",numberOrderTxt.getText().toString());
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
 
-        cartlistref.child("foodlist").child(savecurrenttime).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        final HashMap<String,Object> cartMap = new HashMap<>();
+        cartMap.put("fid",foodid.getText().toString());
+        cartMap.put("fname",titleTxt.getText().toString());
+        cartMap.put("price",feeTxt.getText().toString());
+        cartMap.put("date",saveCurrentDate);
+        cartMap.put("time",saveCurrentTime);
+        cartMap.put("qty",numberOrderTxt.getText().toString());
+
+//        cart.setFid(String.valueOf(food.getId()));
+//        cart.setFname(food.getName());
+
+        cartListRef.child("foodList").child(saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())

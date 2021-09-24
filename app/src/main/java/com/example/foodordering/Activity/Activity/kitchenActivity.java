@@ -94,31 +94,3 @@ public class kitchenActivity extends AppCompatActivity {
 
     }
 }
-
-//        int[] orderId = {69};
-//        boolean[] isServed = {false};
-//
-//        //-------------------------------------------
-//        HashMap<String,Integer> items1 = new HashMap<>();
-//        items1.put("food",420);
-//        items1.put("qty",69);
-//        HashMap<String,Integer> items2 = new HashMap<>();
-//        items2.put("food",420);
-//        items2.put("qty",69);
-//        HashMap<String,HashMap<String,Integer>> itemMap= new HashMap<>();
-//        itemMap.put("item1",items1);
-//        itemMap.put("item2",items2);
-//        //--------------------------------------------
-//
-//        ordersArrayList = new ArrayList<>();
-//
-//        for(int i=0;i<orderId.length;i++) {
-//            Orders order = new Orders(orderId[i],isServed[i],itemMap);
-//            ordersArrayList.add(order);
-//
-//            itemArrayList = new ArrayList<>();
-//            for(int j=0;j<itemMap.size();j++) {
-//                Item item = order.getItemList().get(j);
-//                itemArrayList.add(item);
-//            }
-//        }

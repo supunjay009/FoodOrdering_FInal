@@ -1,13 +1,13 @@
 package com.example.foodordering.Activity.Domain;
 
-public class cart {
+public class Cart {
 
     private String fid,fname,price,qty;
 
-    public cart() {
+    public Cart() {
     }
 
-    public cart(String fid, String fname, String price, String qty) {
+    public Cart(String fid, String fname, String price, String qty) {
         this.fid = fid;
         this.fname = fname;
         this.price = price;

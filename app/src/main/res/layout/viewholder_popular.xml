@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:background="@drawable/cart_background"
-    android:elevation="3dp"
-    android:layout_margin="4dp">
+    android:elevation="3dp">
 
     <ImageView
         android:id="@+id/pic"
-        android:layout_width="80dp"
-        android:layout_height="81dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_margin="6dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@color/material_on_surface_disabled" />
+        app:srcCompat="@color/white" />
 
     <TextView
         android:id="@+id/title"
@@ -39,49 +39,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/fee"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="price"
-        android:textColor="#373b54"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pic" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:text="$"
-        android:textColor="#059951 "
-
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fee"
-        app:layout_constraintEnd_toStartOf="@+id/fee"
         app:layout_constraintTop_toBottomOf="@+id/pic"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_margin="4dp">
+">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LKR"
+
+            android:textColor="#059951 "
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="121dp"
+            android:layout_marginRight="4dp"/>
+
+        <TextView
+            android:id="@+id/fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price"
+            android:textColor="#373b54"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="121dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/add_to_cart_bg"
         android:paddingStart="10dp"
         android:paddingTop="3dp"
         android:paddingEnd="10dp"
         android:paddingBottom="3dp"
         android:text="+Add"
-        android:textColor="#ffffff"
 
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fee" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

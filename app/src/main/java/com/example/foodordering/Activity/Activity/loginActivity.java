@@ -67,6 +67,7 @@ public class loginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(loginActivity.this,"Login Successful!",Toast.LENGTH_LONG).show();
                             kitchenView();
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             btnSignin.setVisibility(View.VISIBLE);

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodordering.Activity.Domain.cart;
+import com.example.foodordering.Activity.Domain.Cart;
 import com.example.foodordering.R;
 
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
 {
 
 
-    ArrayList<cart> cartArrayList;
+    ArrayList<Cart> cartArrayList;
 
-    public cartviewAdapter(ArrayList<cart> cartArrayList) {
+    public cartviewAdapter(ArrayList<Cart> cartArrayList) {
         this.cartArrayList = cartArrayList;
     }
 
@@ -36,7 +36,7 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull cartviewAdapter.ViewHolder holder, @SuppressLint("RecyclerView")  final int position) {
 
-        final cart cart = cartArrayList.get(position);
+        final Cart cart = cartArrayList.get(position);
         holder.txtname.setText(String.valueOf(cart.getFname()));
         holder.txtqty.setText(String.valueOf("Quantity : "+cart.getQty()));
         holder.txtprice.setText(String.valueOf(cart.getPrice()));
@@ -55,7 +55,7 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
         });
 
     }
-    public void setData(ArrayList<cart> citems) {
+    public void setData(ArrayList<Cart> citems) {
         this.cartArrayList = citems;
         notifyDataSetChanged();
     }

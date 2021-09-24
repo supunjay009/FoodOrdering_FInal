@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     foodArrayList.add(food);
                 }
                 popularAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this,String.valueOf(foodArrayList.size()),Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,String.valueOf(foodArrayList.size()),Toast.LENGTH_LONG).show();
             }
 
             @Override

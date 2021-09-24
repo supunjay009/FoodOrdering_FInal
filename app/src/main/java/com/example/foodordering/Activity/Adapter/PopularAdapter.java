@@ -57,24 +57,16 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
             }
         });
 
-
-
-//          PIC
-//        int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(food.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
-//        Glide.with(holder.itemView.getContext())
-//                .load(drawableResourceId)
-//                .into(holder.pic);
-
         //BUTTON
-//        holder.addBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
-//                intent.putExtra("object",foodArrayList.get(position));
-//                holder.itemView.getContext().startActivity(intent);
-//                Toast.makeText(MainActivity.this,String.valueOf(foodArrayList.size()),Toast.LENGTH_LONG).show();
-//            }
-//        });
+        holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
+                intent.putExtra("FOOD",food);
+                holder.itemView.getContext().startActivity(intent);
+                //Toast.makeText(MainActivity.this,String.valueOf(foodArrayList.size()),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
