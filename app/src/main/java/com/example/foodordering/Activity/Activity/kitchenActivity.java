@@ -70,7 +70,9 @@ public class kitchenActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
                     Orders order = snapshot1.getValue(Orders.class);
                     order.setName(snapshot1.getKey());
-                    ordersArrayList.add(order);
+                    if(!order.isServed()){
+                        ordersArrayList.add(order);
+                    }
                     itemArrayList.clear();
                     for (int k=0;k<order.getItemList().size();k++) {
                         itemArrayList.add(order.getItemList().get(k));
