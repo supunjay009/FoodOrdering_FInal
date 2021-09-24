@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.foodordering.Activity.Adapter.OrderAdapter;
@@ -30,6 +32,8 @@ public class kitchenActivity extends AppCompatActivity {
     ArrayList<Item> itemArrayList;
     ArrayList<Food> foodArrayList;
     RecyclerView RVOrder;
+    private LinearLayout homebtn,locationbtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,23 @@ public class kitchenActivity extends AppCompatActivity {
         DatabaseReference orderRef = database.getReference("orders");
         DatabaseReference foodRef = database.getReference("food");
 
+        locationbtn = findViewById(R.id.locationbtn);
+        locationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( kitchenActivity.this,location.class);
+                startActivity(intent);
+            }
+        });
 
+        homebtn = findViewById(R.id.homebtn);
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( kitchenActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
         orderRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

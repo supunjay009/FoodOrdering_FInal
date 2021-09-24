@@ -2,12 +2,12 @@ package com.example.foodordering.Activity.Domain;
 
 public class Cart {
 
-    private String fid,fname,price,qty,images;
-
+    private String fname,images;
+    private  int price,qty,fid;
     public Cart() {
     }
 
-    public Cart(String fid, String fname, String images,String price, String qty) {
+    public Cart(int fid, String fname, String images,int price, int qty) {
         this.fid = fid;
         this.fname = fname;
         this.fname = images;
@@ -15,11 +15,11 @@ public class Cart {
         this.qty = qty;
     }
 
-    public String getFid() {
+    public int getFid() {
         return fid;
     }
 
-    public void setFid(String fid) {
+    public void setFid(int fid) {
         this.fid = fid;
     }
 
@@ -37,19 +37,19 @@ public class Cart {
     public void setImages(String images) {
         this.images = images;
     }
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public String getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 }

@@ -110,18 +110,18 @@ public class ShowDetailActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
-
+        int price = Integer.valueOf(feeTxt.getText().toString());
+        int qty = Integer.parseInt(numberOrderTxt.getText().toString());
+        int fid = Integer.parseInt(foodid.getText().toString());
         final HashMap<String,Object> cartMap = new HashMap<>();
-        cartMap.put("fid",foodid.getText().toString());
+        cartMap.put("fid",fid);
         cartMap.put("fname",titleTxt.getText().toString());
-        cartMap.put("price",feeTxt.getText().toString());
+        cartMap.put("price",price);
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
         cartMap.put("images",food.getImage());
-        cartMap.put("qty",numberOrderTxt.getText().toString());
+        cartMap.put("qty",qty);
 
-//        cart.setFid(String.valueOf(food.getId()));
-//        cart.setFname(food.getName());
 
         cartListRef.child("foodlist").child(foodid.getText().toString()).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

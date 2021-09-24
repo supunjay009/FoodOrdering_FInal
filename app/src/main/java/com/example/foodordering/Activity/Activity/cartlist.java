@@ -39,7 +39,7 @@ public class cartlist extends AppCompatActivity {
     public static Button orderbtn;
     private RecyclerView.LayoutManager layoutManagerger;
     private ScrollView scrollView;
-    private TextView emptytxt;
+      private TextView emptytxt;
     private RecyclerView recycleview;
     cartviewAdapter cartAdapter;
     ArrayList<Cart> cartArrayList;
@@ -52,7 +52,20 @@ public class cartlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartlist);
 
-
+//        if(cartAdapter.getItemCount()==0)
+//        {
+//
+//            emptytxt.setVisibility(TextView.VISIBLE);
+//            scrollView.setVisibility(TextView.INVISIBLE);
+//
+//
+//        }
+//        else
+//        {
+//            emptytxt.setVisibility(TextView.INVISIBLE);
+//            scrollView.setVisibility(TextView.VISIBLE);
+//
+//        }
 
         initView();
         setTableno();
@@ -64,19 +77,37 @@ public class cartlist extends AppCompatActivity {
         recycleview.setLayoutManager(layoutManagerger);
         orderbtn = (Button) findViewById(R.id.placeorderbtn);
         tabletxt=(TextView) findViewById(R.id.textView16);
+        emptytxt=(TextView) findViewById(R.id.emptyTxt);
         overallalltotal = (TextView) findViewById(R.id.totalTxt);
 //get tot from adpter
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReciver,new IntentFilter("MyTotalAmmount"));
 
 
         cartArrayList = new ArrayList<>();
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference cartref = database.getReference("Cart List").child("foodlist");
+        DatabaseReference cartref = database.getReference("CartList").child("foodlist");
+
 
         cartref.addValueEventListener(new ValueEventListener() {
+
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                cartArrayList.clear();
+
+                if(snapshot.exists())
+                {
+
+
+                }
+                else
+                {emptytxt.setVisibility(TextView.VISIBLE);
+                    scrollView.setVisibility(TextView.INVISIBLE);}
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
+
+
                     Cart cart = snapshot1.getValue(Cart.class);
                     cartArrayList.add(cart);
 
@@ -128,59 +159,14 @@ public class cartlist extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //
-//                placeorder();
+//                Toast.makeText(cartlist.this,"Your order is placed.",Toast.LENGTH_SHORT).show();
+//                   Intent intent =new Intent(cartlist.this, MainActivity.class);
+//                  startActivity(intent);
 //            }
 //        });
     }
 
-    private void placeorder() {
 
-//
-//        final DatabaseReference orderlistref = FirebaseDatabase.getInstance().getReference().child("orders");
-//        String tno =tabletxt.getText().toString();
-//        final HashMap<String,Object> cartmap = new HashMap<>();
-//        cartmap.put("id",oid);
-//        cartmap.put("tableno",tno);
-//        cartmap.put("served","False");
-//
-//        orderlistref.child(String.valueOf(oid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful())
-//                {
-//
-//
-//                    Toast.makeText(cartlist.this,"Your order is placed.",Toast.LENGTH_SHORT).show();
-//                    Intent intent =new Intent(cartlist.this, MainActivity.class);
-//                    startActivity(intent);
-//
-//
-//                }
-//            }
-//        });
-//        //int qty = Integer.parseInt(orderqty.getText().toString());
-//        //int fid = Integer.parseInt(fidtxtincart.getText().toString());
-//        int qty = 1;
-//        int fid =1;
-//        final HashMap<String,Object> itemmap = new HashMap<>();
-//        itemmap.put("id",fid);
-//        itemmap.put("image","test.jpg");
-//        //cartmap.put("name",txtnameofitem.getText().toString());
-//        itemmap.put("name","test");
-//        itemmap.put("qty",qty);
-//        itemmap.put("totprice",overallalltotal.getText().toString());
-//
-//        orderlistref.child(String.valueOf(oid)).child("items").child(String.valueOf(fid)).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful())
-//                {
-//                }
-//            }
-//        });
-    }
 
 
     private void initView() {
@@ -190,7 +176,7 @@ public class cartlist extends AppCompatActivity {
         minusBtn = findViewById(R.id.imageView4);
         tabletxt = findViewById(R.id.textView16);
         fidtxtincart=findViewById(R.id.fidtxtincart);
-        //orderqty = cartAdapter.findViewById(R.id.txtqtyincart);
+        scrollView = findViewById(R.id.scrollView4);
         txtnameofitem = findViewById(R.id.title2Txt);
     }
 
