@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.Activity.Adapter.cartviewAdapter;
 import com.example.foodordering.Activity.Domain.Cart;
+import com.example.foodordering.Activity.Domain.Orders;
 import com.example.foodordering.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,8 +30,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class cartlist extends AppCompatActivity {
     private ImageView plusBtn, minusBtn;
@@ -43,7 +47,8 @@ public class cartlist extends AppCompatActivity {
     private RecyclerView recycleview;
     cartviewAdapter cartAdapter;
     ArrayList<Cart> cartArrayList;
-
+    ArrayList<Orders> ordersArrayList;
+public int oid=1;
 
 
 
@@ -52,30 +57,17 @@ public class cartlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartlist);
 
-//        if(cartAdapter.getItemCount()==0)
-//        {
-//
-//            emptytxt.setVisibility(TextView.VISIBLE);
-//            scrollView.setVisibility(TextView.INVISIBLE);
-//
-//
-//        }
-//        else
-//        {
-//            emptytxt.setVisibility(TextView.INVISIBLE);
-//            scrollView.setVisibility(TextView.VISIBLE);
-//
-//        }
 
         initView();
         setTableno();
+       // calculatetotalprice();
 
 
         recycleview =findViewById(R.id.cartlist);
         recycleview.setHasFixedSize(true);
         layoutManagerger =new LinearLayoutManager(this);
         recycleview.setLayoutManager(layoutManagerger);
-        orderbtn = (Button) findViewById(R.id.placeorderbtn);
+
         tabletxt=(TextView) findViewById(R.id.textView16);
         emptytxt=(TextView) findViewById(R.id.emptyTxt);
         overallalltotal = (TextView) findViewById(R.id.totalTxt);
@@ -134,6 +126,7 @@ public class cartlist extends AppCompatActivity {
 
 
 
+
     private void setTableno()
     {
         tabletxt.setText(String.valueOf(tableno));
@@ -155,19 +148,83 @@ public class cartlist extends AppCompatActivity {
 
             }
         });
-//        orderbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(cartlist.this,"Your order is placed.",Toast.LENGTH_SHORT).show();
-//                   Intent intent =new Intent(cartlist.this, MainActivity.class);
-//                  startActivity(intent);
-//            }
-//        });
+        orderbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placeorder();
+
+
+            }
+        });
     }
 
+    private void placeorder() {
+        final DatabaseReference orderlistref = FirebaseDatabase.getInstance().getReference().child("orders");
 
 
+        int randomoid = ThreadLocalRandom.current().nextInt(0, 1000);
+        int tno = Integer.parseInt(tabletxt.getText().toString());
+        final HashMap<String,Object> cartmap = new HashMap<>();
+        cartmap.put("id",randomoid);
+        cartmap.put("tableNo",tno);
+        cartmap.put("served",false);
+
+        orderlistref.child(String.valueOf(randomoid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                {
+
+                    Toast.makeText(cartlist.this,"Your order is placed.",Toast.LENGTH_SHORT).show();
+                    Intent intent =new Intent(cartlist.this, MainActivity.class);
+                    startActivity(intent);
+
+                    DatabaseReference  reference = FirebaseDatabase.getInstance().getReference().child("CartList");
+                    reference.child("foodlist").removeValue();
+
+                }
+
+            }
+        });
+        final HashMap<String,Object> itemmap = new HashMap<>();
+        for (int i=0;i<cartArrayList.size();i++) {
+
+
+            itemmap.put("id",cartArrayList.get(i).getFid());
+            itemmap.put("image",cartArrayList.get(i).getImages());
+            itemmap.put("name",cartArrayList.get(i).getFname());
+            itemmap.put("qty",cartArrayList.get(i).getQty());
+            itemmap.put("totprice",overallalltotal.getText().toString());
+
+            orderlistref.child(String.valueOf(randomoid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful())
+                    {
+
+                    }
+                }
+            });
+        }
+
+
+    }
+    private void calculatetotalprice() {
+
+        int totalprice=0,toteach;
+        for (int i=0;i<cartArrayList.size();i++) {
+
+            int qty =Integer.valueOf(cartArrayList.get(i).getQty());
+            int price =Integer.valueOf(cartArrayList.get(i).getPrice());
+            toteach=qty*price;
+            totalprice=totalprice+toteach;
+
+        }
+        overallalltotal.setText("LKR "+totalprice+".00");
+
+    }
 
     private void initView() {
 
@@ -178,6 +235,7 @@ public class cartlist extends AppCompatActivity {
         fidtxtincart=findViewById(R.id.fidtxtincart);
         scrollView = findViewById(R.id.scrollView4);
         txtnameofitem = findViewById(R.id.title2Txt);
+        orderbtn=findViewById(R.id.placeorderbtn);
     }
 
     public BroadcastReceiver mMessageReciver = new BroadcastReceiver() {

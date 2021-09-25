@@ -38,7 +38,7 @@ import java.util.HashMap;
 
 public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHolder>
 {
-    int totalprice,toteach=0;
+    int totalprice=0,toteach,newtotalprice;
     Context context;
     ArrayList<Cart> cartArrayList;
     DatabaseReference reference;
@@ -64,7 +64,8 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
 
 
         //get img frm db to cart
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");;
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
+        ;
         StorageReference photoRef = storageReference.child(cart.getImages());
         photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -75,108 +76,52 @@ public class cartviewAdapter extends RecyclerView.Adapter<cartviewAdapter.ViewHo
         });
 
         holder.txtname.setText(valueOf(cart.getFname()));
-        holder.txtqty.setText(valueOf("Quantity : "+cart.getQty()));
-        holder.txtprice.setText(valueOf("LKR "+cart.getPrice()+".00"));
+        holder.txtqty.setText(valueOf("Quantity : " + cart.getQty()));
+        holder.txtprice.setText(valueOf("LKR " + cart.getPrice() + ".00"));
         holder.fid.setText(valueOf(cart.getFid()));
 
 
         caltot(position);
 
-         holder.delete.setOnClickListener(new View.OnClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fid =String.valueOf(cartArrayList.get(position).getFid());
+                String fid = String.valueOf(cartArrayList.get(position).getFid());
                 cartArrayList.remove(position);
                 notifyDataSetChanged();
-               deletefid(fid,position);
-
-
-
+                deletefid(fid);
+                totalprice=0;
 
             }
         });
-
-
- cartlist.orderbtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-          public void onClick(View v) {
-
-              placeorder(holder);
-
-          }   });
-    }
-
-    private void placeorder(ViewHolder holder) {
-        final DatabaseReference orderlistref = FirebaseDatabase.getInstance().getReference().child("orders");
-        String saveCurrentTime,saveCurrentDate;
-
-        Calendar calForDate =  Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd yyyy");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
-        String id = saveCurrentDate.toString()+saveCurrentTime.toString();
-        int tno = Integer.parseInt(holder.tableno.getText().toString());
-        final HashMap<String,Object> cartmap = new HashMap<>();
-        cartmap.put("id",id);
-        cartmap.put("tableNo",tno);
-        cartmap.put("served",false);
-
-        orderlistref.child(String.valueOf(id)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                {
-                  // Toast.makeText("Your order is placed.",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        final HashMap<String,Object> itemmap = new HashMap<>();
-        for (int i=0;i<cartArrayList.size();i++) {
-
-
-            itemmap.put("id",cartArrayList.get(i).getFid());
-            itemmap.put("image",cartArrayList.get(i).getImages());
-            itemmap.put("name",cartArrayList.get(i).getFname());
-            itemmap.put("qty",cartArrayList.get(i).getQty());
-            itemmap.put("totprice",totalprice);
-
-            orderlistref.child(String.valueOf(id)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful())
-                    {
-                    }
-                }
-            });
-        }
-
 
     }
 
     private void caltot(int position) {
 
 
-            int qty =Integer.valueOf(cartArrayList.get(position).getQty());
-            int price =Integer.valueOf(cartArrayList.get(position).getPrice());
+        totalprice=0;
+
+
+        for (int i=0;i<cartArrayList.size();i++) {
+
+            int qty =Integer.valueOf(cartArrayList.get(i).getQty());
+            int price =Integer.valueOf(cartArrayList.get(i).getPrice());
             toteach=qty*price;
             totalprice=totalprice+toteach;
             Intent intent = new Intent("MyTotalAmmount");
             intent.putExtra("totalAmmount",totalprice);
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-
+        }
 
 
     }
 
-    private void deletefid(String fid,int position) {
+    private void deletefid(String fid) {
         reference = FirebaseDatabase.getInstance().getReference().child("CartList");
         reference.child("foodlist").child(fid).removeValue();
-        totalprice=0;
+
 
     }
 
