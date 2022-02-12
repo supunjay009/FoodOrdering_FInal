@@ -17,6 +17,7 @@ import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
 import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.Activity.Domain.FoodDomain;
+import com.example.foodordering.GeoLocation;
 import com.example.foodordering.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -60,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( MainActivity.this,location.class);
-                startActivity(intent);
+                Mapview();
             }
 
 
@@ -148,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginview() {
         Intent intent = new Intent(this, loginActivity.class);
+        startActivity(intent);
+    }
+    public void Mapview() {
+        Intent intent = new Intent(this, GeoLocation.class);
         startActivity(intent);
     }
 }
