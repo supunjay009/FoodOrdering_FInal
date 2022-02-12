@@ -2,8 +2,11 @@ package com.example.foodordering.Activity.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 //Supun Category View
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
     private LinearLayout kitchenbtn,add_btn;
     private ArrayList<Food> foodArrayList;
+    private EditText editText;
 
 //Cat View.................
     private Button btnKitchen;
@@ -43,6 +48,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editText =(EditText) findViewById(R.id.editTextTextPersonName);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!s.toString().isEmpty())
+                {
+                    seacrch(s.toString());
+                }
+                else
+                {
+                    seacrch("");
+                }
+            }
+        });
+
+
+
+
+
+
+
 
         //Category View.............................................................................
         recyclerViewCategory();
@@ -81,6 +119,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void seacrch(String toString) {
+
+        ArrayList<Food> filterdList = new ArrayList<>();
+
+        for(Food items:foodArrayList )
+        {
+            if(items.getName().toLowerCase().startsWith(toString.toLowerCase()))
+        {
+            filterdList.add(items);
+        }
+
+        }
+        popularAdapter.filterList(filterdList);
     }
 
     private void recyclerViewPopular() {

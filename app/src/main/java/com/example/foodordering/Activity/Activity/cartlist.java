@@ -197,7 +197,7 @@ public int oid=1;
             itemmap.put("qty",cartArrayList.get(i).getQty());
             //itemmap.put("totprice",overallalltotal.getText().toString());
 
-            orderlistref.child(String.valueOf("order"+randomoid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            orderlistref.child(String.valueOf("order"+randomoid)).child("items").child(String.valueOf("item"+cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
