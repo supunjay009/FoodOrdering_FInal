@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +18,7 @@ import com.example.foodordering.Activity.Adapter.CategoryAdapter;
 import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
 import com.example.foodordering.Activity.Domain.Food;
-import com.example.foodordering.Activity.Domain.FoodDomain;
-import com.example.foodordering.GeoLocation;
 import com.example.foodordering.R;
-import com.example.foodordering.info;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 //Supun Category View

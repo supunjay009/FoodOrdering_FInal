@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering" >
         <activity
-            android:name=".info"
+            android:name=".Activity.Activity.info"
             android:exported="true" />
         <activity
-            android:name=".GeoLocation"
+            android:name=".Activity.Activity.GeoLocation"
             android:exported="true" />
         <activity
             android:name=".Activity.Activity.SplashActivity"
