@@ -7,16 +7,17 @@ public class Orders {
     private int id,tableNo;
     private boolean served;
     private HashMap<String,Item> items;
-    private String name;
+    private String name,price;
 
     public Orders() {
     }
 
-    public Orders(int id, int tableNo, boolean served, HashMap<String, Item> items) {
+    public Orders(int id, int tableNo,String price, boolean served, HashMap<String, Item> items) {
         this.id = id;
         this.tableNo = tableNo;
         this.served = served;
         this.items = items;
+        this.price = price;
     }
 
     public int getId() {
@@ -51,5 +52,13 @@ public class Orders {
 
     public int getTableNo() {
         return tableNo;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
