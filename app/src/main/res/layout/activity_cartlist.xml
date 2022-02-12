@@ -81,7 +81,7 @@
 
                 <TextView
                     android:id="@+id/tbltxt"
-                    android:layout_width="258dp"
+                    android:layout_width="272dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
