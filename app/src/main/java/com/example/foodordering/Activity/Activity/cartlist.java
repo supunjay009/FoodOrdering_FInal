@@ -169,7 +169,7 @@ public int oid=1;
         cartmap.put("tableNo",tno);
         cartmap.put("served",false);
 
-        orderlistref.child(String.valueOf(randomoid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        orderlistref.child(String.valueOf("order"+randomoid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -195,9 +195,9 @@ public int oid=1;
             itemmap.put("image",cartArrayList.get(i).getImages());
             itemmap.put("name",cartArrayList.get(i).getFname());
             itemmap.put("qty",cartArrayList.get(i).getQty());
-            itemmap.put("totprice",overallalltotal.getText().toString());
+            //itemmap.put("totprice",overallalltotal.getText().toString());
 
-            orderlistref.child(String.valueOf(randomoid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            orderlistref.child(String.valueOf("order"+randomoid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
