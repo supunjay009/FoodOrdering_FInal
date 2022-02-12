@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.foodordering">
+    package="com.example.foodordering" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,14 +12,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/appmenuico_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodOrdering">
+        android:theme="@style/Theme.FoodOrdering" >
+        <activity
+            android:name=".info"
+            android:exported="true" />
         <activity
             android:name=".GeoLocation"
             android:exported="true" />
         <activity
             android:name=".Activity.Activity.SplashActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +51,7 @@
             android:exported="true" />
         <activity
             android:name=".Activity.Activity.IntroActivity"
-            android:exported="true">
+            android:exported="true" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

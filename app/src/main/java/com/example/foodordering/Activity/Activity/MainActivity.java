@@ -22,6 +22,7 @@ import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.Activity.Domain.FoodDomain;
 import com.example.foodordering.GeoLocation;
 import com.example.foodordering.R;
+import com.example.foodordering.info;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private PopularAdapter popularAdapter;
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
-    private LinearLayout kitchenbtn,add_btn;
+    private LinearLayout kitchenbtn,add_btn,setting_btn;
     private ArrayList<Food> foodArrayList;
     private EditText editText;
 
@@ -105,7 +106,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        setting_btn = findViewById(R.id.settings_btn);
+        setting_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setting();
+            }
 
+
+
+        });
         FloatingActionButton cartbtn = (FloatingActionButton) findViewById(R.id.cart_btn);
         cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +215,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Mapview() {
         Intent intent = new Intent(this, GeoLocation.class);
+        startActivity(intent);
+    }
+    public void setting() {
+        Intent intent = new Intent(this, info.class);
         startActivity(intent);
     }
 }
