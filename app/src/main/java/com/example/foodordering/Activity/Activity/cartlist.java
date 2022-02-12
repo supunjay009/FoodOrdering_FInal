@@ -48,7 +48,7 @@ public class cartlist extends AppCompatActivity {
     cartviewAdapter cartAdapter;
     ArrayList<Cart> cartArrayList;
     ArrayList<Orders> ordersArrayList;
-public int oid=1;
+    public int oid=1;
 
 
 
@@ -168,6 +168,9 @@ public int oid=1;
         cartmap.put("id",randomoid);
         cartmap.put("tableNo",tno);
         cartmap.put("served",false);
+        cartmap.put("price",overallalltotal.getText().toString());
+
+
 
         orderlistref.child(String.valueOf("order"+randomoid)).updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -197,7 +200,7 @@ public int oid=1;
             itemmap.put("qty",cartArrayList.get(i).getQty());
             //itemmap.put("totprice",overallalltotal.getText().toString());
 
-            orderlistref.child(String.valueOf("order"+randomoid)).child("items").child(String.valueOf(cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            orderlistref.child(String.valueOf("order"+randomoid)).child("items").child(String.valueOf("item"+cartArrayList.get(i).getFid())).updateChildren(itemmap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -223,7 +226,6 @@ public int oid=1;
 
         }
         overallalltotal.setText("LKR "+totalprice+".00");
-
     }
 
     private void initView() {
@@ -243,7 +245,7 @@ public int oid=1;
         public void onReceive(Context context, Intent intent) {
             int totalbill =intent.getIntExtra("totalAmmount",0);
 
-            overallalltotal.setText("LKR "+totalbill+".00");
+            overallalltotal.setText("Rs. " +totalbill+".00");
         }
     };
 }

@@ -6,16 +6,16 @@ public class Food implements Serializable {
 
 
     private int id, price;
-    private double rating;
+    //private double rating;
     private String name,description,image;
 
     public Food() {
     }
 
-    public Food(int id, int price, double rating, String name, String description, String image) {
+    public Food(int id, int price, String name, String description, String image) {
         this.id = id;
         this.price = price;
-        this.rating = rating;
+        //this.rating = rating;
         this.name = name;
         this.description = description;
         this.image = image;
@@ -29,9 +29,9 @@ public class Food implements Serializable {
         return price;
     }
 
-    public double getRating() {
-        return rating;
-    }
+    //public double getRating() {
+        //return rating;
+    //}
 
     public String getName() {
         return name;

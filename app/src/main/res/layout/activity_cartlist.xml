@@ -81,10 +81,9 @@
 
                 <TextView
                     android:id="@+id/tbltxt"
-                    android:layout_width="258dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
+                    android:layout_weight="18"
                     android:text="Table No :"
                     android:textColor="#373b54"
 
@@ -96,9 +95,8 @@
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-
                     android:layout_weight="1"
-                    android:src="@drawable/minus" />
+                    android:src="@drawable/minus"/>
 
                 <TextView
                     android:id="@+id/textView16"
@@ -107,9 +105,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="1"
+                    android:textAlignment="center"
                     android:textColor="#373b54"
-
-                    android:textSize="18dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -117,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/plus" />
+                    android:src="@drawable/plus"/>
 
 
             </LinearLayout>

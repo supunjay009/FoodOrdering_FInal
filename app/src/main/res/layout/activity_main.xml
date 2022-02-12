@@ -326,7 +326,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/substract_background"
             android:elevation="3dp"
-            android:src="@drawable/foodstand"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
             app:backgroundTint="#049458"
             app:layout_anchor="@id/app_bar"
             app:maxImageSize="30dp"
