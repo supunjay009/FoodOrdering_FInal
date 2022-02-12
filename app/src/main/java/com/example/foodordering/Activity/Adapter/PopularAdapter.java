@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
     ArrayList<Food> foodArrayList;
@@ -73,6 +74,12 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     @Override
     public int getItemCount() {
         return foodArrayList.size();
+    }
+
+    public void filterList(ArrayList<Food> filtereList)
+    {
+foodArrayList=filtereList;
+notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

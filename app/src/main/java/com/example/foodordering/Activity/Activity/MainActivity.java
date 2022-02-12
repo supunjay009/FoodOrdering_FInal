@@ -2,8 +2,11 @@ package com.example.foodordering.Activity.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.example.foodordering.Activity.Adapter.PopularAdapter;
 import com.example.foodordering.Activity.Domain.CategoryDomain;
 import com.example.foodordering.Activity.Domain.Food;
 import com.example.foodordering.Activity.Domain.FoodDomain;
+import com.example.foodordering.GeoLocation;
 import com.example.foodordering.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 //Supun Category View
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList;
     private LinearLayout kitchenbtn,add_btn;
     private ArrayList<Food> foodArrayList;
+    private EditText editText;
 
 //Cat View.................
     private Button btnKitchen;
@@ -42,6 +48,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editText =(EditText) findViewById(R.id.editTextTextPersonName);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!s.toString().isEmpty())
+                {
+                    seacrch(s.toString());
+                }
+                else
+                {
+                    seacrch("");
+                }
+            }
+        });
+
+
+
+
+
+
+
 
         //Category View.............................................................................
         recyclerViewCategory();
@@ -60,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( MainActivity.this,location.class);
-                startActivity(intent);
+                Mapview();
             }
 
 
@@ -81,6 +119,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void seacrch(String toString) {
+
+        ArrayList<Food> filterdList = new ArrayList<>();
+
+        for(Food items:foodArrayList )
+        {
+            if(items.getName().toLowerCase().startsWith(toString.toLowerCase()))
+        {
+            filterdList.add(items);
+        }
+
+        }
+        popularAdapter.filterList(filterdList);
     }
 
     private void recyclerViewPopular() {
@@ -148,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginview() {
         Intent intent = new Intent(this, loginActivity.class);
+        startActivity(intent);
+    }
+    public void Mapview() {
+        Intent intent = new Intent(this, GeoLocation.class);
         startActivity(intent);
     }
 }

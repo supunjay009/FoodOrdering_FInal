@@ -116,21 +116,24 @@
 
                     <ImageView
                         android:id="@+id/imageView6"
-                        android:layout_width="149dp"
-                        android:layout_height="113dp"
+                        android:layout_width="145dp"
+                        android:layout_height="107dp"
                         android:layout_marginEnd="198dp"
-                        android:src="@drawable/soda"
+
+                        android:src="@drawable/round_logo"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.511" />
 
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Free Coke"
+                        android:text="We are now on"
                         android:textColor="#000000"
                         android:textSize="20sp"
 
@@ -143,26 +146,23 @@
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="October Every Weekend"
+                        android:text="Uber Eats."
                         android:textColor="#000000"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView6"
                         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12pm to 4pm"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="46dp"
+                        android:layout_height="49dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView7"
                         app:layout_constraintStart_toStartOf="@+id/textView7"
                         app:layout_constraintTop_toBottomOf="@+id/textView7"
-                        app:layout_constraintVertical_bias="0.120000005" />
+                        app:srcCompat="@drawable/download" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
