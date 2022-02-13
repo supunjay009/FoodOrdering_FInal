@@ -41,7 +41,7 @@ public class cartlist extends AppCompatActivity {
     public static Button orderbtn;
     private RecyclerView.LayoutManager layoutManagerger;
     private ScrollView scrollView;
-      private TextView emptytxt;
+    private TextView emptytxt;
     private RecyclerView recycleview;
     cartviewAdapter cartAdapter;
     ArrayList<Cart> cartArrayList;
@@ -68,7 +68,10 @@ public class cartlist extends AppCompatActivity {
 
         tabletxt=(TextView) findViewById(R.id.textView16);
         emptytxt=(TextView) findViewById(R.id.emptyTxt);
+        scrollView=(ScrollView) findViewById(R.id.scrollView4);
         overallalltotal = (TextView) findViewById(R.id.totalTxt);
+
+        scrollView.setVisibility(View.INVISIBLE);
 //get tot from adpter
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReciver,new IntentFilter("MyTotalAmmount"));
 
@@ -87,14 +90,13 @@ public class cartlist extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 cartArrayList.clear();
 
-                if(snapshot.exists())
+                if(!snapshot.exists())
                 {
-
-
+                    emptytxt.setVisibility(TextView.VISIBLE);
                 }
-                else
-                {emptytxt.setVisibility(TextView.VISIBLE);
-                    scrollView.setVisibility(TextView.INVISIBLE);}
+                else {
+                    scrollView.setVisibility(View.VISIBLE);
+                }
                 for(DataSnapshot snapshot1: snapshot.getChildren()) {
 
 

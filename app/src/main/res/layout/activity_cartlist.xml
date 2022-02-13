@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Activity.cartlist">
 
+
+
     <TextView
         android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Food  Cart Is Empty."
+        android:text="Your Food Cart is Empty."
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -96,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/minus"/>
+                    android:src="@drawable/minus" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -115,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/plus"/>
+                    android:src="@drawable/plus" />
 
 
             </LinearLayout>

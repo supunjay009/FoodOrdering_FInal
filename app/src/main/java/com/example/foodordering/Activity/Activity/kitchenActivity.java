@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodordering.Activity.Adapter.OrderAdapter;
@@ -32,6 +33,7 @@ public class kitchenActivity extends AppCompatActivity {
     ArrayList<Item> itemArrayList;
     ArrayList<Food> foodArrayList;
     RecyclerView RVOrder;
+    private TextView emptyTxt;
     private LinearLayout homebtn,locationbtn;
 
 
@@ -39,6 +41,8 @@ public class kitchenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen);
+
+        emptyTxt = (TextView) findViewById(R.id.emptyTxtKitchen);
 
         RVOrder = findViewById(R.id.lstOrder);
 
@@ -70,6 +74,8 @@ public class kitchenActivity extends AppCompatActivity {
         orderRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+//
                 foodArrayList.clear();
                 ordersArrayList.clear();
                 foodRef.addValueEventListener((new ValueEventListener() {
@@ -99,6 +105,13 @@ public class kitchenActivity extends AppCompatActivity {
                     }
                     //Toast.makeText(kitchenActivity.this,String.valueOf(itemArrayList.size()),Toast.LENGTH_LONG).show();
                 }
+
+                if(ordersArrayList.size()==0)
+                {
+                    emptyTxt.setVisibility(TextView.VISIBLE);
+                    RVOrder.setVisibility(View.GONE);
+                }
+
                 orderAdapter.notifyDataSetChanged();
             }
 

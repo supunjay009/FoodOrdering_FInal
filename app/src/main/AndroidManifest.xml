@@ -59,15 +59,7 @@
         <activity
             android:name=".Activity.Activity.ShowDetailActivity"
             android:exported="true" />
-        <activity
-            android:name=".Activity.Activity.IntroActivity"
-            android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
         <activity
             android:name=".Activity.Activity.MainActivity"
             android:exported="true" />
