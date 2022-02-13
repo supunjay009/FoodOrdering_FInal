@@ -48,9 +48,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Activity.location"
-            android:exported="true" />
-        <activity
             android:name=".Activity.Activity.cartlist"
             android:exported="true" />
         <activity

@@ -54,7 +54,7 @@ public class kitchenActivity extends AppCompatActivity {
         locationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( kitchenActivity.this,location.class);
+                Intent intent = new Intent( kitchenActivity.this,MapsActivity.class);
                 startActivity(intent);
             }
         });
