@@ -208,10 +208,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, loginActivity.class);
         startActivity(intent);
     }
+
     public void Mapview() {
-        Intent intent = new Intent(this, GeoLocation.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
     public void setting() {
         Intent intent = new Intent(this, info.class);
         startActivity(intent);
