@@ -9,10 +9,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lstOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/emptyTxtKitchen"
@@ -28,8 +34,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -135,14 +142,14 @@
                         android:id="@+id/imageView12"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:src="@drawable/settings"
-                        app:srcCompat="@drawable/settings" />
+                        android:src="@android:drawable/ic_menu_info_details"
+                        app:srcCompat="@android:drawable/ic_menu_info_details"  />
 
                     <TextView
                         android:id="@+id/textView14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Settings"
+                        android:text="Info"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
