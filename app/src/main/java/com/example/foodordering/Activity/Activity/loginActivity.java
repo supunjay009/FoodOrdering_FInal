@@ -45,11 +45,28 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = editEmail.getText().toString().trim();
                 password = editPassword.getText().toString();
+                if(email.matches(""))
+                {
+                    Toast.makeText(loginActivity.this,"Please Enter Email.",Toast.LENGTH_LONG).show();
+                }
+                else if( password .matches(""))
+                {
+                    Toast.makeText(loginActivity.this,"Please Enter Password.",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
 
-                btnSignin.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
+                    userLogin();
+                    btnSignin.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                }
 
-                userLogin();
+
+
+
+
+
+
             }
         });
     }
@@ -60,21 +77,26 @@ public class loginActivity extends AppCompatActivity {
     }
 
     private void userLogin(){
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(loginActivity.this,"Login Successful!",Toast.LENGTH_LONG).show();
-                            kitchenView();
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            btnSignin.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(loginActivity.this,"Failed to login. Check Email and Password!",Toast.LENGTH_LONG).show();
-                        }
+
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(loginActivity.this,"Login Successful!",Toast.LENGTH_LONG).show();
+                        kitchenView();
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        btnSignin.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(loginActivity.this,"Failed to login. Check Email and Password!",Toast.LENGTH_LONG).show();
                     }
-                });
+                }
+            });
+
+
+
     }
 }
