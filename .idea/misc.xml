@@ -46,8 +46,23 @@
         <entry key="..\:/FoodOrdering/app/src/main/res/layout/lst_row_order_item.xml" value="0.21014492753623187" />
         <entry key="..\:/FoodOrdering/app/src/main/res/layout/viewholder_cat.xml" value="0.264" />
         <entry key="..\:/FoodOrdering/app/src/main/res/layout/viewholder_popular.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/drawable/background_loginnew.xml" value="0.1" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/drawable/gray_background.xml" value="0.2545" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/drawable/login_background.xml" value="0.2275" />
         <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_cartlist.xml" value="0.21014492753623187" />
         <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_info.xml" value="0.2" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_kitchen.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_login.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_main.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_maps.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/activity_show_detail.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/cart_item_layout.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/login_activitynew.xml" value="0.264" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/lst_row_food.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/lst_row_order_item.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/signup_activity.xml" value="0.25" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/viewholder_cat.xml" value="0.21014492753623187" />
+        <entry key="..\:/FoodOrdering_FInal/app/src/main/res/layout/viewholder_popular.xml" value="0.21014492753623187" />
         <entry key="..\:/My Works/Study Notes-NIBM/NIBM SoftWare enginierng Higer NationalDiploma/Semester 2/App/app/src/main/res/drawable/add_to_cart_bg.xml" value="0.25833333333333336" />
         <entry key="..\:/My Works/Study Notes-NIBM/NIBM SoftWare enginierng Higer NationalDiploma/Semester 2/App/app/src/main/res/drawable/decrease_btn.xml" value="0.25833333333333336" />
         <entry key="..\:/My Works/Study Notes-NIBM/NIBM SoftWare enginierng Higer NationalDiploma/Semester 2/App/app/src/main/res/layout/activity_foodview.xml" value="0.4" />
